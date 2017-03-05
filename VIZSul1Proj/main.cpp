@@ -73,17 +73,25 @@ Mat applyLaplace(Mat src) {
 
 }
 
-//Mat get
+Mat computeOpticalFlow(cv::Mat img, cv::UMat prevgray) {
+	Mat flow, frame;
+	// some faster than mat image container
+	UMat  flowUmat;
+
+	// just make current frame gray
+	cvtColor(img, img, COLOR_BGR2GRAY);
+
+	return img;
+}
 
 int main(int argc, const char** argv){
+	cv::UMat prevgray;
 
 	// add your file name
 	VideoCapture cap(0);// "internetExperiment.wmv");//"MOV_0011.mp4");
 
 
-	Mat flow, frame;
-	// some faster than mat image container
-	UMat  flowUmat, prevgray;
+
 
 	for (;;)
 	{
@@ -95,16 +103,13 @@ int main(int argc, const char** argv){
 			break;
 		}
 		else {
-
-
-
 			Mat img;
 			Mat original;
 			Mat laplace;
 
 			// capture frame from video file
 			cap.retrieve(img, CV_CAP_OPENNI_BGR_IMAGE);
-			resize(img, img, Size(640, 480));
+			//resize(img, img, Size(640, 480));
 
 			// save original for later
 			img.copyTo(original);
@@ -115,8 +120,7 @@ int main(int argc, const char** argv){
 			//save frame to file
 			saveFrame(img);
 
-			// just make current frame gray
-			cvtColor(img, img, COLOR_BGR2GRAY);
+
 
 
 			// For all optical flow you need a sequence of images.. Or at least 2 of them. Previous                           //and current frame
@@ -127,7 +131,7 @@ int main(int argc, const char** argv){
 			//   }
 			// if previous frame is not empty.. There is a picture of previous frame. Do some                                  //optical flow alg. 
 
-			if (prevgray.empty() == false) {
+			/*if (prevgray.empty() == false) {
 
 				// calculate optical flow 
 				calcOpticalFlowFarneback(prevgray, img, flowUmat, 0.4, 1, 12, 2, 8, 1.2, 0);
@@ -150,25 +154,28 @@ int main(int argc, const char** argv){
 
 					}
 
-				}
+				}*/
 
 				// draw the results
-				namedWindow("prew", WINDOW_AUTOSIZE);
-				imshow("prew", original);
+				//namedWindow("prew", WINDOW_AUTOSIZE);
+				//imshow("prew", original);
 
-				namedWindow("laplacian", WINDOW_AUTOSIZE);
-				imshow("laplacian", laplace);
+				//namedWindow("laplacian", WINDOW_AUTOSIZE);
+				//imshow("laplacian", laplace);
+
+				namedWindow("orig", WINDOW_AUTOSIZE);
+				imshow("orig", original);
 
 				// fill previous image again
 				img.copyTo(prevgray);
 
-			}
+			/*}
 			else {
 
 				// fill previous image in case prevgray.empty() == true
 				img.copyTo(prevgray);
 
-			}
+			}*/
 
 
 			int key1 = waitKey(20);
