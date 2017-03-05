@@ -6,10 +6,46 @@
 #include <stdio.h>
 #include <Windows.h>
 #include <iostream>
+#include <time.h>
+#include <string>
+#include <chrono>
 
 
 using namespace cv;
 using namespace std;
+using namespace std::chrono;
+
+void saveFrame(Mat src){
+	//cas
+	time_t rawtime;
+	struct tm*timeinfo;
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
+	std::string myFileName;
+	milliseconds ms = duration_cast< milliseconds >(
+		system_clock::now().time_since_epoch()
+		);
+	std::ostringstream mlss;
+	mlss << ms.count();
+	std::string milli_str = mlss.str();
+	myFileName = "captureVid\\" + milli_str + ".bmp";
+	//zapisanie obrazka do suboru
+	vector<int> compression_params;
+	compression_params.push_back(CV_IMWRITE_PNG_COMPRESSION);
+	compression_params.push_back(9);
+
+	try {
+
+		imwrite(myFileName, src, compression_params);
+
+		cout << myFileName << endl;
+	}
+	catch (runtime_error& ex) {
+		fprintf(stderr, "Exception converting image to PNG format: %s\n", ex.what());
+		return;
+	}
+
+}
 
 Mat applyLaplace(Mat src) {
 	Mat  src_gray, dst;
@@ -37,8 +73,9 @@ Mat applyLaplace(Mat src) {
 
 }
 
-int main(int argc, const char** argv)
-{
+//Mat get
+
+int main(int argc, const char** argv){
 
 	// add your file name
 	VideoCapture cap(0);// "internetExperiment.wmv");//"MOV_0011.mp4");
@@ -73,7 +110,10 @@ int main(int argc, const char** argv)
 			img.copyTo(original);
 
 			// apply laplace operator
-			laplace = applyLaplace(img);
+			//laplace = applyLaplace(img);
+
+			//save frame to file
+			saveFrame(img);
 
 			// just make current frame gray
 			cvtColor(img, img, COLOR_BGR2GRAY);
