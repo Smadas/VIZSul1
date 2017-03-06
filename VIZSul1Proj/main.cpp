@@ -69,26 +69,32 @@ std::vector<cv::Mat> readImgFiles(std::string imagesDirectory) {
 	return readImages;
 }
 
-int main()
-{
+int showImagesFromDirectory(std::string imagesDirectory) {
 	Mat image;
 	int numImages = 0;
 	std::vector<cv::Mat> readImages;
 	namedWindow("Display window", WINDOW_AUTOSIZE); // Create a window for display.
-
+													
 	//show all images from directory
-	readImages = readImgFiles("captureVidX\\");
+	readImages = readImgFiles(imagesDirectory);
 	numImages = readImages.size();
 	if (numImages == 0) {
 		std::cout << "Could not read images!" << std::endl;
 		return 0;
 	}
-	image = readImages.at(1);
-	cv::imshow("Display window", image); // Show our image inside it.
-
-
-	int key1 = cv::waitKey(20);
+	for (int imageCount = 0; imageCount < numImages; imageCount++) {
+		image = readImages.at(imageCount);
+		cv::imshow("Display window", image); // Show our image inside it.
+		int key1 = cv::waitKey(20);
+	}
 
 	cv::waitKey(0); // Wait for a keystroke in the window
+	return 0;
+}
+
+int main()
+{
+	if (0 != showImagesFromDirectory("captureVidX\\")) {
+	}
 	return 0;
 }
