@@ -3,6 +3,7 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <iostream>
 #include <Windows.h>
+#include <vector>
 
 using namespace cv;
 using namespace std;
@@ -40,23 +41,52 @@ int main()
 	image = imread("Autobus.bmp", IMREAD_COLOR);
 
 	//read directory
+	/*std::vector<string> names;
 	WIN32_FIND_DATA fd;
-	HANDLE hFind = ::FindFirstFile((LPCWSTR)"captureVidX\*.bmp*", &fd);
+	LPCWSTR search_path = L"captureVidX\\*.bmp*";
+	int fileCounter = 0;
+	HANDLE hFind = FindFirstFile(search_path, &fd);
 	if (hFind != INVALID_HANDLE_VALUE) {
 		do {
 			// read all (real) files in current folder
 			// , delete '!' read other 2 default folder . and ..
 			if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
 				//names.push_back(fd.cFileName);
-				std::cout << "autobus" << std::endl;
+				fileCounter++;
+				std::cout << fileCounter << std::endl;
 				std::cout << fd.cFileName << std::endl;
+				names.push_back(fd.cFileName);
 			}
 		} while (::FindNextFile(hFind, &fd));
 		::FindClose(hFind);
 	}
 	else{
 		std::cout << "Could not open folder!" << std::endl;
+	}*/
+
+	vector<string> names;
+	WIN32_FIND_DATAA fd;
+	LPCSTR search_path = "captureVidX\\*.bmp*";
+	int fileCounter = 0;
+	HANDLE hFind = FindFirstFileA(search_path, &fd);
+	if (hFind != INVALID_HANDLE_VALUE) {
+		do {
+			// read all (real) files in current folder
+			// , delete '!' read other 2 default folder . and ..
+			if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
+				//names.push_back(fd.cFileName);
+				fileCounter++;
+				std::cout << fileCounter << std::endl;
+				std::cout << fd.cFileName << std::endl;
+				names.push_back(fd.cFileName);
+			}
+		} while (::FindNextFileA(hFind, &fd));
+		::FindClose(hFind);
 	}
+	else {
+		std::cout << "Could not open folder!" << std::endl;
+	}
+
 
 	if (!image.data){ // Check for invalid input
 		cout << "Could not open or find the image" << std::endl;
