@@ -8,6 +8,8 @@
 using namespace cv;
 using namespace std;
 
+#define IMG_TYPE "*.bmp*"
+
 std::vector<string> getImageFileNames(std::string imagesDirectory) {
 	std::vector<string> names;
 	WIN32_FIND_DATAA fd;
@@ -31,61 +33,61 @@ std::vector<string> getImageFileNames(std::string imagesDirectory) {
 	}
 	else {
 		std::cout << "Could not open folder!" << std::endl;
+		return {};
 	}
 
 	return names;
 }
 
 std::vector<cv::Mat> readImgFiles(std::string imagesDirectory) {
+	Mat image;
+	std::vector<cv::Mat> readImages;
+	std::string imgFileName;
+	std::string imgFilesDirectory = imagesDirectory;
+	
+	//read image file names
+	std::vector<string> imgFileNames;
+	imgFileNames = getImageFileNames(imagesDirectory + IMG_TYPE);
+	int imgFilesNumber = imgFileNames.size();
+	if (imgFilesNumber == 0) {
+		std::cout << "Error reading image files!" << std::endl;
+		return {};
+	}
 
+	//read files
+	for (int imageCount = 1; imageCount < imgFilesNumber; imageCount++) {
+		imgFileName = imgFilesDirectory + imgFileNames.at(imageCount);
+		image = cv::imread(imgFileName, IMREAD_COLOR);
+		if (!image.data) { // Check for invalid input
+			cout << "Could not open or find the image!" << std::endl;
+			return {};
+		}
+		else {
+			readImages.push_back(image);
+		}
+	}
+	return readImages;
 }
 
 int main()
 {
 	Mat image;
-	Point lineStart;
-	Point lineEnd;
-	lineEnd.x = 20;
-	lineEnd.y = 20;
-	lineStart.x = 100;
-	lineStart.y = 100;
-	std::string imgFileName;
-	std::string imgFilesDirectory = "captureVidX\\";
+	int numImages = 0;
+	std::vector<cv::Mat> readImages;
 	namedWindow("Display window", WINDOW_AUTOSIZE); // Create a window for display.
 
-	//read directory
-	std::vector<string> imgFileNames;
-	imgFileNames = getImageFileNames("captureVidX\\*.bmp*");
-	int imgFilesNumber = imgFileNames.size();
-	
 	//show all images from directory
-	for (int imageCount = 1; imageCount < imgFilesNumber; imageCount++) {
-		imgFileName = imgFilesDirectory + imgFileNames.at(imageCount);
-		image = cv::imread(imgFileName, IMREAD_COLOR);
-		if (!image.data) { // Check for invalid input
-			cout << "Could not open or find the image" << std::endl;
-			return -1;
-		}
-
-		
-		cv::imshow("Display window", image); // Show our image inside it.
-		//line(image, lineStart, lineEnd, Scalar(0, 255, 0), 5, 8, 0);
-		//imshow("Display window", image); // Show our image inside it.
-										 //zapisanie obrazka so suboru
-		/*vector<int> compression_params;
-		compression_params.push_back(CV_IMWRITE_PNG_COMPRESSION);
-		compression_params.push_back(9);
-		try {
-			imwrite("vystup.png", image, compression_params);
-		}
-		catch (runtime_error& ex) {
-			fprintf(stderr, "Exception converting image to PNG format: %s\n", ex.what());
-			return 1;
-		}*/
-
-		int key1 = cv::waitKey(20);
+	readImages = readImgFiles("captureVidX\\");
+	numImages = readImages.size();
+	if (numImages == 0) {
+		std::cout << "Could not read images!" << std::endl;
+		return 0;
 	}
-	
+	image = readImages.at(1);
+	cv::imshow("Display window", image); // Show our image inside it.
+
+
+	int key1 = cv::waitKey(20);
 
 	cv::waitKey(0); // Wait for a keystroke in the window
 	return 0;
