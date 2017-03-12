@@ -1,0 +1,21 @@
+//just copy demo you want to try to main file
+
+//demo display all pictures from captureVidX directory
+#include "readImagesFromDirectory.h"
+
+int main()
+{
+	if (0 != showImagesFromDirectory("captureVidX\\")) {
+	}
+	return 0;
+}
+
+//demo display all pictures and compute iptical flow of few points
+#include "opticalFlowLucasKanade.h"
+
+int main()
+{
+	if (0 != showOpticalFlow()) {
+	}
+	return 0;
+}

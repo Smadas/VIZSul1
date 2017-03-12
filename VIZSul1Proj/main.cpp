@@ -1,9 +1,8 @@
-
-#include "readImagesFromDirectory.h"
+#include "opticalFlowLucasKanade.h"
 
 int main()
 {
-	if (0 != showImagesFromDirectory("captureVidX\\")) {
+	if (0 != showOpticalFlow()) {
 	}
 	return 0;
 }
