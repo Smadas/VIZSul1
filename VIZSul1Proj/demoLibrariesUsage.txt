@@ -9,3 +9,13 @@ int main()
 	}
 	return 0;
 }
+
+//demo display all pictures and compute iptical flow of few points
+#include "opticalFlowLucasKanade.h"
+
+int main()
+{
+	if (0 != showOpticalFlow()) {
+	}
+	return 0;
+}

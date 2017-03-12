@@ -6,5 +6,5 @@
 #include <Windows.h>
 #include <vector>
 
-int computeOpticalFlow(cv::Mat gray, cv::Mat prevGray, std::vector<cv::Point2f> points, std::vector<cv::Point2f> prevPoints);
+int computeOpticalFlow(cv::Mat *gray, cv::Mat *prevGray, std::vector<cv::Point2f> *points, std::vector<cv::Point2f> *prevPoints);
 int showOpticalFlow();
