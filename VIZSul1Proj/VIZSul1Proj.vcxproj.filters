@@ -21,6 +21,9 @@
     <ClCompile Include="readImagesFromDirectory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="opticalFlowLucasKanade.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Autobus.bmp">
@@ -31,5 +34,13 @@
     <ClInclude Include="readImagesFromDirectory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="opticalFlowLucasKanade.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="demoLibrariesUsage.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

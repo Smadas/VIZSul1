@@ -1,0 +1,11 @@
+//just copy demo you want to try to main file
+
+//demo display all pictures from captureVidX directory
+#include "readImagesFromDirectory.h"
+
+int main()
+{
+	if (0 != showImagesFromDirectory("captureVidX\\")) {
+	}
+	return 0;
+}

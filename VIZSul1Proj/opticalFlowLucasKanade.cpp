@@ -9,30 +9,11 @@
 using namespace cv;
 using namespace std;
 
-static void help()
-{
-	// print a welcome message, and the OpenCV version
-	cout << "\nThis is a demo of Lukas-Kanade optical flow lkdemo(),\n"
-		"Using OpenCV version " << CV_VERSION << endl;
-	cout << "\nIt uses camera by default, but you can provide a path to video as an argument.\n";
-	cout << "\nHot keys: \n"
-		"\tESC - quit the program\n"
-		"\tr - auto-initialize tracking\n"
-		"\tc - delete all the points\n"
-		"\tn - switch the \"night\" mode on/off\n"
-		"To add/remove a feature point click it\n" << endl;
-}
-
 Point2f point;
 bool addRemovePt = false;
 
-static void onMouse(int event, int x, int y, int /*flags*/, void* /*param*/)
-{
-	if (event == EVENT_LBUTTONDOWN)
-	{
-		point = Point2f((float)x, (float)y);
-		addRemovePt = true;
-	}
+int computeOpticalFlow() {
+	return 0;
 }
 
 int main(int argc, char** argv)
@@ -45,19 +26,9 @@ int main(int argc, char** argv)
 	bool needToInit = false;
 	bool nightMode = false;
 
-	cv::CommandLineParser parser(argc, argv, "{@input||}{help h||}");
-	string input = parser.get<string>("@input");
-	if (parser.has("help"))
-	{
-		help();
-		return 0;
-	}
-	if (input.empty())
-		cap.open(0);
-	else if (input.size() == 1 && isdigit(input[0]))
-		cap.open(input[0] - '0');
-	else
-		cap.open(input);
+
+	cap.open(0);
+
 
 	if (!cap.isOpened())
 	{
@@ -66,7 +37,6 @@ int main(int argc, char** argv)
 	}
 
 	namedWindow("LK Demo", 1);
-	setMouseCallback("LK Demo", onMouse, 0);
 
 	Mat gray, prevGray, image, frame;
 	vector<Point2f> points[2];
@@ -79,7 +49,7 @@ int main(int argc, char** argv)
 
 		frame.copyTo(image);
 		cvtColor(image, gray, COLOR_BGR2GRAY);
-
+		
 		if (nightMode)
 			image = Scalar::all(0);
 

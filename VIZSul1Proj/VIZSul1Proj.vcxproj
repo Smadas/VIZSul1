@@ -159,13 +159,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="opticalFlowLucasKanade.cpp" />
     <ClCompile Include="readImagesFromDirectory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Autobus.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="opticalFlowLucasKanade.h" />
     <ClInclude Include="readImagesFromDirectory.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="demoLibrariesUsage.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
