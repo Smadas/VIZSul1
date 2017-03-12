@@ -8,8 +8,6 @@
 
 #include "readImagesFromDirectory.h"
 
-//using namespace cv;
-
 int computeOpticalFlow(cv::Mat *gray, cv::Mat *prevGray, std::vector<cv::Point2f> *points, std::vector<cv::Point2f> *prevPoints) {
 	cv::TermCriteria termcrit(cv::TermCriteria::COUNT | cv::TermCriteria::EPS, 20, 0.03);
 	cv::Size subPixWinSize(10, 10), winSize(31, 31);
