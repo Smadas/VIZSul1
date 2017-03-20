@@ -24,6 +24,9 @@
     <ClCompile Include="opticalFlowLucasKanade.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DetectTarget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Autobus.bmp">
@@ -35,6 +38,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="opticalFlowLucasKanade.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DetectTarget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

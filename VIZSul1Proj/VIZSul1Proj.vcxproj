@@ -158,6 +158,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DetectTarget.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="opticalFlowLucasKanade.cpp" />
     <ClCompile Include="readImagesFromDirectory.cpp" />
@@ -166,6 +167,7 @@
     <Image Include="Autobus.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DetectTarget.h" />
     <ClInclude Include="opticalFlowLucasKanade.h" />
     <ClInclude Include="readImagesFromDirectory.h" />
   </ItemGroup>
