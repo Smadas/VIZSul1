@@ -12,7 +12,7 @@ int main()
 	/*if (0 != showOpticalFlow()) {
 	}
 	return 0;*/
-	
+
 	int nPoint = 10;
 	Point2f coord, coord2;
 	target tar;
@@ -26,16 +26,16 @@ int main()
 	std::vector<cv::Mat> readImages = readImgFiles("captureVidX\\");
 
 	// Read images one by one
-	for (int i = 0; i < readImages.size(); i++) {
+	for (int i = 0; i < readImages.size(); i += 5) {
 		frame = readImages.at(i);
 		if (frame.empty())
 			break;
 
-		
+
 		// Detect good points to track
 		tar = detect(frame, nPoint);
 		points2[0] = tar.points;
-		
+
 
 		// Compute optical flow
 		frame.copyTo(image);
@@ -44,8 +44,8 @@ int main()
 
 		/*// Display dots
 		for (size_t i = 0; i < tar.points.size(); i++) {
-			coord = tar.points[i];
-			cv::circle(image, coord, 3, Scalar(0, 0, 255), -1, 8);
+		coord = tar.points[i];
+		cv::circle(image, coord, 3, Scalar(0, 0, 255), -1, 8);
 		}*/
 		// Display vectors
 		for (size_t i = 0; i < tar.points.size(); i++) {
@@ -58,6 +58,6 @@ int main()
 		waitKey(20);
 
 	}
-		
+
 	waitKey(0);
 }

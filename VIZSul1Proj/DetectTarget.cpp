@@ -28,7 +28,7 @@ target detect(Mat src, int nPoint) {
 	center = calcCircleCenter(points);
 
 	tar.points = points;
-	tar.center = Point(circle[0],circle[1]);
+	tar.center = Point(circle[0], circle[1]);
 
 	return tar;
 
@@ -57,7 +57,7 @@ Vec3f findCircle(Mat src) {
 
 		c = circles[i];
 		colour = src.at<Vec3b>(c[1], c[0]);
-		
+
 		// compare centre pixel with [<120-220>,<240-255>,<240-255>] BGR (real colour is [180 255 255])
 		if ((colour[0] > 120) && (colour[0] < 240) && (colour[1] > 240) && (colour[2] > 240)) {
 			return (circles[i]);
@@ -95,7 +95,7 @@ vector<Point2f> findPoints(Mat src, Vec3f circle, int number) {
 		coord = betterPoint(src, circle, coord, angle);
 
 		output[0].push_back(coord);
-			
+
 	}
 
 	return output[0];
@@ -156,12 +156,12 @@ Point2f calcCircleCenter(vector<Point2f> Points) {
 
 	if (fmod(n, 3) == 2) {
 		p2 = Points[n2 + 1];
-		p3 = Points[n2*2 + 1];
+		p3 = Points[n2 * 2 + 1];
 	}
 	else
 	{
 		p2 = Points[n2];
-		p3 = Points[n2*2];
+		p3 = Points[n2 * 2];
 	}
 
 	// Vypocet stredu kruznice

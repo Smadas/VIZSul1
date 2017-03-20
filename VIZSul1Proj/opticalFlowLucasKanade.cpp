@@ -14,7 +14,7 @@ int computeOpticalFlow(cv::Mat *gray, cv::Mat *prevGray, std::vector<cv::Point2f
 
 	const int MAX_COUNT = 500;
 
-	if (!points->empty()){
+	if (!points->empty()) {
 		std::vector<uchar> status;
 		std::vector<float> err;
 		if (prevGray->empty())
@@ -24,8 +24,8 @@ int computeOpticalFlow(cv::Mat *gray, cv::Mat *prevGray, std::vector<cv::Point2f
 		std::cout << "prevPoints" << prevPoints->size() << std::endl;
 	}
 
-	std::swap(prevPoints, points);
-	cv::swap(prevGray, gray);
+	std::swap(*prevPoints, *points);
+	cv::swap(*prevGray, *gray);
 
 	return 0;
 }
@@ -68,20 +68,20 @@ int showOpticalFlow() {
 	myPoint.x = 390;
 	myPoint.y = 255;
 	points[0].push_back(myPoint);
-		/*
-		434 171
-		486 226
-		447 273
-		411 272
-		378 222
-		394 188
-		473 190
-		471 258
-		390 255
-			*/
+	/*
+	434 171
+	486 226
+	447 273
+	411 272
+	378 222
+	394 188
+	473 190
+	471 258
+	390 255
+	*/
 
 
-	for (int i = 0; i < readImages.size(); i++){
+	for (int i = 0; i < readImages.size(); i++) {
 		frame = readImages.at(i);
 		if (frame.empty())
 			break;
