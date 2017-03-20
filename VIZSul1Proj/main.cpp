@@ -1,5 +1,6 @@
 #include "opticalFlowLucasKanade.h"
 #include "DetectTarget.h"
+#include "readImagesFromDirectory.h"
 
 struct target {
 	std::vector<Point2f> points;
@@ -8,26 +9,55 @@ struct target {
 
 int main()
 {
-	//if (0 != showOpticalFlow()) {
-	//}
-	//return 0;
-
-	// Detect object
-	Mat src = imread("TestImage.bmp", IMREAD_COLOR);
-	int nPoint = 8;
-	Point2f coord;
-	target tar;
-
-	tar = detect(src, nPoint);
-
-	// Display dots
-	for (size_t i = 0; i < tar.points.size(); i++) {
-		coord = tar.points[i];
-		cv::circle(src, coord, 3, Scalar(0, 0, 255), -1, 8);
+	/*if (0 != showOpticalFlow()) {
 	}
-	cv::circle(src, tar.center, 3, Scalar(0, 0, 255), -1, 8);
-	imshow("Display window", src);
-	waitKey();
+	return 0;*/
+	
+	int nPoint = 10;
+	Point2f coord, coord2;
+	target tar;
+	cv::Mat gray, prevGray, image, frame;
+	cv::Point2f myPoint;
+	std::vector<cv::Point2f> points2[2];
+
+	// ------------------------------------------------------------------------------------------------------
+
+	// Read images
+	std::vector<cv::Mat> readImages = readImgFiles("captureVidX\\");
+
+	// Read images one by one
+	for (int i = 0; i < readImages.size(); i++) {
+		frame = readImages.at(i);
+		if (frame.empty())
+			break;
+
+		
+		// Detect good points to track
+		tar = detect(frame, nPoint);
+		points2[0] = tar.points;
 		
 
+		// Compute optical flow
+		frame.copyTo(image);
+		cvtColor(image, gray, cv::COLOR_BGR2GRAY);
+		computeOpticalFlow(&gray, &prevGray, &points2[0], &points2[1]);
+
+		/*// Display dots
+		for (size_t i = 0; i < tar.points.size(); i++) {
+			coord = tar.points[i];
+			cv::circle(image, coord, 3, Scalar(0, 0, 255), -1, 8);
+		}*/
+		// Display vectors
+		for (size_t i = 0; i < tar.points.size(); i++) {
+			coord = points2[0][i];
+			coord2 = points2[1][i];
+			cv::arrowedLine(image, coord, coord2, Scalar(0, 0, 255), 1, 8);
+		}
+		cv::circle(image, tar.center, 3, Scalar(0, 0, 255), -1, 8);
+		imshow("Display window", image);
+		waitKey(20);
+
+	}
+		
+	waitKey(0);
 }

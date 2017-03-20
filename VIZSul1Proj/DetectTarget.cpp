@@ -59,7 +59,7 @@ Vec3f findCircle(Mat src) {
 		colour = src.at<Vec3b>(c[1], c[0]);
 		
 		// compare centre pixel with [<120-220>,<240-255>,<240-255>] BGR (real colour is [180 255 255])
-		if ((colour[0] > 120) && (colour[0] < 220) && (colour[1] > 240) && (colour[2] > 240)) {
+		if ((colour[0] > 120) && (colour[0] < 240) && (colour[1] > 240) && (colour[2] > 240)) {
 			return (circles[i]);
 		}
 
@@ -126,7 +126,7 @@ Point2f betterPoint(Mat src, Vec3f circle, Point2f coord, float angle) {
 		betterCoord.y = y;
 		colour = src.at<Vec3b>(y, x);
 
-		if ((colour[0] > 120) && (colour[0] < 220) && (colour[1] > 240) && (colour[2] > 240)) {
+		if ((colour[0] > 120) && (colour[0] < 250) && (colour[1] > 220) && (colour[2] > 220)) {
 			break;
 		}
 
