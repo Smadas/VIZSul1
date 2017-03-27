@@ -13,7 +13,7 @@ int main()
 	}
 	return 0;*/
 
-	int nPoint = 10;
+	int nPoint = 20;
 	Point2f coord, coord2;
 	target tar;
 	cv::Mat gray, prevGray, image, frame;
@@ -26,7 +26,7 @@ int main()
 	std::vector<cv::Mat> readImages = readImgFiles("captureVidX\\");
 
 	// Read images one by one
-	for (int i = 0; i < readImages.size(); i += 5) {
+	for (int i = 0; i < readImages.size(); i += 10) {
 		frame = readImages.at(i);
 		if (frame.empty())
 			break;
@@ -51,11 +51,11 @@ int main()
 		for (size_t i = 0; i < tar.points.size(); i++) {
 			coord = points2[0][i];
 			coord2 = points2[1][i];
-			cv::arrowedLine(image, coord, coord2, Scalar(0, 0, 255), 1, 8);
+			cv::arrowedLine(image, coord, coord2, Scalar(0, 0, 255), 2, 8);
 		}
 		cv::circle(image, tar.center, 3, Scalar(0, 0, 255), -1, 8);
 		imshow("Display window", image);
-		waitKey(20);
+		waitKey(150);
 
 	}
 

@@ -51,19 +51,28 @@ Vec3f findCircle(Mat src) {
 		100, 30, 40, 70 // change the last two parameters
 						// (min_radius & max_radius) to detect larger circles
 	);
-
+	Mat pic = src.clone();
 	// Remove all other circles
 	for (size_t i = 0; i < circles.size(); i++) {
 
 		c = circles[i];
 		colour = src.at<Vec3b>(c[1], c[0]);
+		
+		// Zobraz kruh
+		/*Point center(cvRound(c[0]), cvRound(c[1]));
+		int radius = cvRound(c[2]);
+		cv::circle(pic, center, radius, Scalar(0, 0, 255), 2, 8);
+		imshow("Display window", pic);
+		waitKey(0);*/
 
-		// compare centre pixel with [<120-220>,<240-255>,<240-255>] BGR (real colour is [180 255 255])
-		if ((colour[0] > 120) && (colour[0] < 240) && (colour[1] > 240) && (colour[2] > 240)) {
+		// compare centre pixel with [<180>,<120-255>,<220-255>] BGR 
+		if ((colour[0] < 220) && (colour[1] > 100) && (colour[2] > 180)) {
 			return (circles[i]);
 		}
 
 	}
+
+	
 
 	// If no good circle detected, return 0
 	return 0;
@@ -119,14 +128,19 @@ Point2f betterPoint(Mat src, Vec3f circle, Point2f coord, float angle) {
 	// posuvaj sa po malych kuskoch smerom k stredu a zistuj, ci je farba v rozmedzi farebnej skaly targetu
 	while (1) {
 
-		x = x - sin(angle);
-		y = y - cos(angle);
+		x = x - sin(angle)*0.2;
+		y = y - cos(angle)*0.2;
 
 		betterCoord.x = x;
 		betterCoord.y = y;
 		colour = src.at<Vec3b>(y, x);
 
-		if ((colour[0] > 120) && (colour[0] < 250) && (colour[1] > 220) && (colour[2] > 220)) {
+		// Zobraz posunutie
+		/*cv::circle(pic, betterCoord, 3, Scalar(0, 0, 255), -1, 8);
+		imshow("Display window", pic);
+		waitKey(20);*/
+
+		if ((colour[0] < 240) && (colour[1] > 100) && (colour[2] > 180)) {
 			break;
 		}
 
