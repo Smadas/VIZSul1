@@ -23,7 +23,7 @@ int main()
 	// ------------------------------------------------------------------------------------------------------
 
 	// Read images
-	std::vector<cv::Mat> readImages = readImgFiles("captureVidX\\");
+	std::vector<cv::Mat> readImages = readImgFiles("captureVidY\\");
 
 	// Read images one by one
 	for (int i = 0; i < readImages.size(); i += 10) {
@@ -60,4 +60,5 @@ int main()
 	}
 
 	waitKey(0);
+	//return 0;
 }

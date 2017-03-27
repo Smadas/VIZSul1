@@ -157,10 +157,12 @@ Point2f calcCircleCenter(vector<Point2f> Points) {
 	float cx, cy;
 	int n, n2;
 	Point2f p1, p2, p3, center;
+	center.x = 0;
+	center.y = 0;
 
 	// Ak nie je dostatok bodov, ukonci sa
 	if (Points.size() < 3) {
-		return 0;
+		return center;
 	}
 
 	// Vyber 3 body rovnomerne rozdelene
