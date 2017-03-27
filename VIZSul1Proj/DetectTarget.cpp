@@ -41,7 +41,7 @@ Vec3f findCircle(Mat src) {
 
 	vector<Vec3f> circles;
 	Mat gray;
-	Vec3f c;
+	Vec3f c = (0, 0, 0);
 	Vec3b colour;
 
 	cvtColor(src, gray, COLOR_BGR2GRAY);
@@ -75,7 +75,7 @@ Vec3f findCircle(Mat src) {
 	
 
 	// If no good circle detected, return 0
-	return 0;
+	return c;
 
 }
 
@@ -156,11 +156,11 @@ Point2f calcCircleCenter(vector<Point2f> Points) {
 
 	float cx, cy;
 	int n, n2;
-	Point2f p1, p2, p3, center;
+	Point2f p1, p2, p3, center = (0, 0);
 
 	// Ak nie je dostatok bodov, ukonci sa
 	if (Points.size() < 3) {
-		return 0;
+		return center;
 	}
 
 	// Vyber 3 body rovnomerne rozdelene
@@ -187,3 +187,18 @@ Point2f calcCircleCenter(vector<Point2f> Points) {
 
 }
 
+
+void vectorParam(vector<Point2f> points) {
+	// Calculate angle and magnitude of vectors
+
+	int size = points.size();
+	int dx;
+	int dy;
+
+	for (size_t i = 0; i < size; i++) {
+		dx = points[0][i];
+	}
+
+
+
+}

@@ -23,10 +23,10 @@ int main()
 	// ------------------------------------------------------------------------------------------------------
 
 	// Read images
-	std::vector<cv::Mat> readImages = readImgFiles("captureVidX\\");
+	std::vector<cv::Mat> readImages = readImgFiles("captureVidY\\");
 
 	// Read images one by one
-	for (int i = 0; i < readImages.size(); i += 10) {
+	for (int i = 0; i < readImages.size(); i += 20) {
 		frame = readImages.at(i);
 		if (frame.empty())
 			break;
@@ -52,6 +52,7 @@ int main()
 			coord = points2[0][i];
 			coord2 = points2[1][i];
 			cv::arrowedLine(image, coord, coord2, Scalar(0, 0, 255), 2, 8);
+			//cv::circle(image, coord, 4, Scalar(0, 0, 255), -1, 8);
 		}
 		cv::circle(image, tar.center, 3, Scalar(0, 0, 255), -1, 8);
 		imshow("Display window", image);
