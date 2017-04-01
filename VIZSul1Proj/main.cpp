@@ -6,6 +6,7 @@
 int main() {
 
 	printDistanceOfMovingObject("captureVidY\\");
+	printMovementVectorLengthY("captureVidY\\");
 	waitKey(0);
 	return 0;
 }

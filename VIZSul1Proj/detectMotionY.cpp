@@ -2,6 +2,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <iostream>
+#include <vector>
 
 #include "DetectTarget.h"
 #include "readImagesFromDirectory.h"
@@ -13,8 +14,7 @@ lineEquation calibrateAxisY(std::string calibImagesDir){
 	calibLineEquation.Q = 0;
 	std::vector<cv::Mat> readImages = readImgFiles(calibImagesDir);
 	std::cout << "calib img num " << readImages.size() << std::endl;
-	if (readImages.size() < 2)
-	{
+	if (readImages.size() < 2){
 		std::cout << "Failed to read calibration images!" << std::endl;
 		return calibLineEquation;
 	}
@@ -36,18 +36,35 @@ double getObjectDistanceY(lineEquation widthDistanceDependency, double objectWid
 	return distance;
 }
 
-double getObjectMovementY()
-{
-	
-	return 0;
+double getObjectDistanceY(lineEquation widthDistanceDependency, cv::Mat img, double objectWidthCm) {
+	double distance;
+	cv::Vec3f diameter = findCircle(img);//fitEllipse, minEnclosingCircle
+	distance = widthDistanceDependency.K*objectWidthCm / diameter[2]/ 2 + widthDistanceDependency.Q;
+	return distance;
+}
+
+double getObjectDistanceY(lineEquation widthDistanceDependency, std::vector<cv::Point2f> circlePoints, double objectWidthCm) {
+	double distance;
+	//cv::Vec3f diameter = findCircle(img);//fitEllipse, minEnclosingCircle
+	Point2f circleCenter;
+	float radius;
+	minEnclosingCircle(circlePoints, circleCenter, radius);
+	distance = widthDistanceDependency.K*objectWidthCm / radius / 2 + widthDistanceDependency.Q;
+	return distance;
+}
+
+double getObjectMotionY(double *objectDist, double *objectDistPrev) {
+	double motion = 0;
+	motion = *objectDist - *objectDistPrev;
+	*objectDistPrev = *objectDist;
+	return motion;
 }
 
 lineEquation getLineEquation(linePoint startPoint, linePoint endPoint){
 	lineEquation lineEquationC;
 	lineEquationC.K = 0;
 	lineEquationC.Q = 0;
-	if ((endPoint.x - startPoint.x) == 0)
-	{
+	if ((endPoint.x - startPoint.x) == 0){
 		std::cout << "Error, division by zero!" << std::endl;
 		return lineEquationC;
 	}
@@ -60,12 +77,30 @@ void printDistanceOfMovingObject(std::string motionImagesDir) {
 	lineEquation widthDistanceDependency = calibrateAxisY("calibY\\");
 	std::vector<cv::Mat> readImages = readImgFiles(motionImagesDir);
 	cv::namedWindow("Display window", 1);
-	for (int imgCount = 0; imgCount < readImages.size(); imgCount += 15)
-	{
-		cv::Vec3f startPoint3 = findCircle(readImages.at(imgCount));
-		double objDist = getObjectDistanceY(widthDistanceDependency, startPoint3[2], CALIB_CIRCLE_DIAMETER / 2);
+	for (int imgCount = 0; imgCount < readImages.size(); imgCount += 15){
+		cv::Vec3f diameter = findCircle(readImages.at(imgCount));//fitEllipse, minEnclosingCircle
+		double objDist = getObjectDistanceY(widthDistanceDependency, diameter[2], CALIB_CIRCLE_DIAMETER / 2);
 		std::cout << "Camera distance from target! " << objDist << std::endl;
 		imshow("Display window", readImages.at(imgCount));
 		waitKey(20);
 	}
 }
+
+void printMovementVectorLengthY(std::string motionImagesDir)
+{
+	lineEquation widthDistanceDependency = calibrateAxisY("calibY\\");
+	std::vector<cv::Mat> readImages = readImgFiles(motionImagesDir);
+	cv::namedWindow("Display window", 1);
+	double objDist = 0;
+	double objDistPrev = 0;
+
+	for (int imgCount = 0; imgCount < readImages.size(); imgCount += 15) {
+		cv::Vec3f diameter = findCircle(readImages.at(imgCount));//fitEllipse, minEnclosingCircle
+		objDist = getObjectDistanceY(widthDistanceDependency, diameter[2], CALIB_CIRCLE_DIAMETER / 2);
+		double movement = getObjectMotionY(&objDist, &objDistPrev);
+		std::cout << "Camera distance movement toward target! " << movement << std::endl;
+		imshow("Display window", readImages.at(imgCount));
+		waitKey(20);
+	}
+}
+

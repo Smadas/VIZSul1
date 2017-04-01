@@ -10,11 +10,10 @@ int main()
 	return 0;
 }
 
-//demo display all pictures and compute iptical flow of few points
+//demo display all pictures and compute optical flow of few points
 #include "opticalFlowLucasKanade.h"
 
-int main()
-{
+int main(){
 	if (0 != showOpticalFlow()) {
 	}
 	return 0;
@@ -29,6 +28,7 @@ int main()
 int main() {
 
 	printDistanceOfMovingObject("captureVidY\\");
+	printMovementVectorLengthY("captureVidY\\");
 	waitKey(0);
 	return 0;
 }
