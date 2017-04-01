@@ -58,8 +58,8 @@ Vec3f findCircle(Mat src) {
 		c = circles[i];
 		colour = src.at<Vec3b>(c[1], c[0]);
 		
-		// Zobraz kruh
-		/*Point center(cvRound(c[0]), cvRound(c[1]));
+		/*// Zobraz kruh
+		Point center(cvRound(c[0]), cvRound(c[1]));
 		int radius = cvRound(c[2]);
 		cv::circle(pic, center, radius, Scalar(0, 0, 255), 2, 8);
 		imshow("Display window", pic);
@@ -188,7 +188,7 @@ Point2f calcCircleCenter(vector<Point2f> Points) {
 }
 
 
-void vectorParam(vector<Point2f> points) {
+/*void vectorParam(vector<Point2f> points) {
 	// Calculate angle and magnitude of vectors
 
 	int size = points.size();
@@ -201,4 +201,4 @@ void vectorParam(vector<Point2f> points) {
 
 
 
-}
+}*/
