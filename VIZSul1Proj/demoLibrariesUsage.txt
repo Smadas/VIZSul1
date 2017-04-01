@@ -32,10 +32,6 @@ struct target {
 
 int main()
 {
-	/*if (0 != showOpticalFlow()) {
-	}
-	return 0;*/
-
 	int nPoint = 20;
 	Point2f coord, coord2;
 	target tar;

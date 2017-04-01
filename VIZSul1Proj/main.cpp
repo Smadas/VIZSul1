@@ -31,7 +31,6 @@ int main()
 		if (frame.empty())
 			break;
 
-
 		// Detect good points to track
 		tar = detect(frame, nPoint);
 		points2[0] = tar.points;
