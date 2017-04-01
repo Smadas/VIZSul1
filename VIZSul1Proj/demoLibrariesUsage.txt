@@ -20,6 +20,19 @@ int main()
 	return 0;
 }
 
+//demo get distance of camera from target
+#include "opticalFlowLucasKanade.h"
+#include "DetectTarget.h"
+#include "readImagesFromDirectory.h"
+#include "detectMotionY.h"
+
+int main() {
+
+	printDistanceOfMovingObject("captureVidY\\");
+	waitKey(0);
+	return 0;
+}
+
 //demo display optical flow - with arrows - object automatically detected
 #include "opticalFlowLucasKanade.h"
 #include "DetectTarget.h"

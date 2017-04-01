@@ -55,7 +55,7 @@ std::vector<cv::Mat> readImgFiles(std::string imagesDirectory) {
 	}
 
 	//read files
-	for (int imageCount = 1; imageCount < imgFilesNumber; imageCount++) {
+	for (int imageCount = 0; imageCount < imgFilesNumber; imageCount++) {
 		imgFileName = imgFilesDirectory + imgFileNames.at(imageCount);
 		image = cv::imread(imgFileName, IMREAD_COLOR);
 		if (!image.data) { // Check for invalid input
