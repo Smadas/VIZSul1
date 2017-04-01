@@ -30,3 +30,4 @@ double getObjectMotionY(double *objectDist, double *objectDistPrev);
 lineEquation getLineEquation(linePoint startPoint, linePoint endPoint);
 void printDistanceOfMovingObject(std::string motionImagesDir);
 void printMovementVectorLengthY(std::string motionImagesDir);
+void printMovementVectorLengthYoptflow(std::string motionImagesDir);

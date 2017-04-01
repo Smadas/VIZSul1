@@ -5,8 +5,9 @@
 
 int main() {
 
-	printDistanceOfMovingObject("captureVidY\\");
-	printMovementVectorLengthY("captureVidY\\");
+	//printDistanceOfMovingObject("captureVidY\\");
+	//printMovementVectorLengthY("captureVidY\\");
+	printMovementVectorLengthYoptflow("captureVidY\\");
 	waitKey(0);
 	return 0;
 }
