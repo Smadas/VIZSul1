@@ -2,12 +2,14 @@
 #include "DetectTarget.h"
 #include "readImagesFromDirectory.h"
 #include "detectMotionY.h"
+#include "captureVideo.h"
 
 int main() {
 
 	//printDistanceOfMovingObject("captureVidY\\");
 	//printMovementVectorLengthY("captureVidY\\");
 	printMovementVectorLengthYoptflow("captureVidY\\");
+	//captureVideoAsImages(0);
 	waitKey(0);
 	return 0;
 }
