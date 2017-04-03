@@ -9,6 +9,9 @@
 #include "detectMotionY.h"
 #include "opticalFlowLucasKanade.h"
 
+#define FONT_SCALE 0.8
+#define FONT_THICKNESS 1
+#define FONT_LINE_TYPE 8
 
 struct target {
 	std::vector<Point2f> points;
@@ -120,6 +123,7 @@ void printMovementVectorLengthYoptflow(std::string motionImagesDir)
 	cv::namedWindow("Display window", 1);
 	double objDist = 0;
 	double objDistPrev = 0;
+	Point2f coord, coord2;
 
 	// Detect good points to track
 	frame = readImages.at(0);
@@ -140,6 +144,9 @@ void printMovementVectorLengthYoptflow(std::string motionImagesDir)
 			size_t i, k;
 			for (i = 0; i < points[1].size(); i++)
 			{
+				coord = points[0][i];
+				coord2 = points[1][i];
+				cv::arrowedLine(image, coord, coord2, Scalar(0, 0, 255), 2, 8);
 				circle(image, points[1][i], 3, cv::Scalar(0, 255, 0), -1, 8);
 			}
 		}
@@ -147,7 +154,11 @@ void printMovementVectorLengthYoptflow(std::string motionImagesDir)
 		objDist = getObjectDistanceY(widthDistanceDependency, points[1], CALIB_CIRCLE_DIAMETER / 2);
 		double movement = getObjectMotionY(&objDist, &objDistPrev);
 		std::cout << "Camera distance movement toward target! " << movement << std::endl;
+		cv::Point textPoint;
+		textPoint.x = 50;
+		textPoint.y = 50;
+		cv::putText(image, "Rododendron", textPoint, FONT_HERSHEY_COMPLEX_SMALL, FONT_SCALE, cvScalar(255, 0, 0), FONT_THICKNESS, FONT_LINE_TYPE, false);
 		imshow("Display window", image);
-		cv::waitKey(100);
+		cv::waitKey(200);
 	}
 }

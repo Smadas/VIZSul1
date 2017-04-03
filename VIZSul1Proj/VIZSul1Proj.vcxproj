@@ -161,6 +161,7 @@
     <ClCompile Include="captureVideo.cpp" />
     <ClCompile Include="detectMotionY.cpp" />
     <ClCompile Include="DetectTarget.cpp" />
+    <ClCompile Include="displayData.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="opticalFlowLucasKanade.cpp" />
     <ClCompile Include="readImagesFromDirectory.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="captureVideo.h" />
     <ClInclude Include="detectMotionY.h" />
     <ClInclude Include="DetectTarget.h" />
+    <ClInclude Include="displayData.h" />
     <ClInclude Include="opticalFlowLucasKanade.h" />
     <ClInclude Include="readImagesFromDirectory.h" />
   </ItemGroup>
