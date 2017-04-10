@@ -159,6 +159,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="captureVideo.cpp" />
+    <ClCompile Include="detectMotionXZ.cpp" />
     <ClCompile Include="detectMotionY.cpp" />
     <ClCompile Include="DetectTarget.cpp" />
     <ClCompile Include="main.cpp" />
@@ -170,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="captureVideo.h" />
+    <ClInclude Include="detectMotionXZ.h" />
     <ClInclude Include="detectMotionY.h" />
     <ClInclude Include="DetectTarget.h" />
     <ClInclude Include="opticalFlowLucasKanade.h" />
