@@ -66,7 +66,7 @@ int main()
 
 		// Calculate Y axis
 		cv::Vec3f diameter = findCircle(readImages.at(i));//fitEllipse, minEnclosingCircle
-		objDist = getObjectDistanceY(widthDistanceDependency, points2[1], CALIB_CIRCLE_DIAMETER / 2);
+		objDist = getObjectDistanceY(widthDistanceDependency, points2[0], CALIB_CIRCLE_DIAMETER / 2);
 		double movement = getObjectMotionY(&objDist, &objDistPrev);
 		std::cout << "Camera Movement Y : " << movement << std::endl;
 		
@@ -87,8 +87,11 @@ int main()
 
 
 		// Display image
-		imshow("Display window", image);
-		waitKey(150);
+		if (i > 0) {
+			imshow("Display window", image);
+			waitKey(150);
+		}
+
 
 	}
 
