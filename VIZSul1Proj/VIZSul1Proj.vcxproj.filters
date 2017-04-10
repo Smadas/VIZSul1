@@ -30,6 +30,9 @@
     <ClCompile Include="detectMotionY.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="detectMotionXZ.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Autobus.bmp">
@@ -47,6 +50,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="detectMotionY.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="detectMotionXZ.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
