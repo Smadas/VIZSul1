@@ -3,6 +3,7 @@
 #include "readImagesFromDirectory.h"
 #include "detectMotionY.h"
 #include "detectMotionXZ.h"
+#include "displayData.h"
 
 //int main() {
 //
@@ -20,7 +21,6 @@ struct target {
 
 int main()
 {
-
 	int nPoint = 15;
 	Point2f coord, coord2, xz;
 	target tar;
@@ -57,7 +57,7 @@ int main()
 		// Display points
 		if (!points2[0].empty())
 		{
-			size_t i, k;
+			size_t i;
 			for (i = 0; i < points2[1].size(); i++)
 			{
 				circle(image, points2[1][i], 3, cv::Scalar(0, 255, 0), -1, 8);
@@ -85,7 +85,10 @@ int main()
 			std::cout << "Camera Movement Up : " << xz.y << std::endl;
 		}
 
-
+		cv::Point displayCenter;
+		displayCenter.x = 100;
+		displayCenter.y = 100;
+		displayVectorY(&image, 10, displayCenter);
 		// Display image
 		if (i > 0) {
 			imshow("Display window", image);
