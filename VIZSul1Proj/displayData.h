@@ -5,3 +5,4 @@
 #include <opencv2/imgproc/imgproc.hpp>
 
 void displayVectorY(cv::Mat *img, double direction, cv::Point centerPoint);
+void displayVectorXZ(cv::Mat *img, double distance, double angle, cv::Point centerPoint);

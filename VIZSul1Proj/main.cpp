@@ -79,6 +79,7 @@ int main()
 		else
 		{
 			// Calculate XZ axis
+			vectorP angleXZ = vectorParam(points2[0][0], points2[1][0]);
 			xz = getObjectmotionXZ(points2[0], points2[1]);
 			if (xz.x < -1) {
 				std::cout << "Camera Movement Right : " << -xz.x << std::endl;
@@ -92,6 +93,10 @@ int main()
 			else if (xz.y > 1) {
 				std::cout << "Camera Movement Up : " << xz.y << std::endl;
 			}
+			cv::Point displayCenter;
+			displayCenter.x = 30;
+			displayCenter.y = 30;
+			displayVectorXZ(&image, cv::norm(points2[0], points2[1]), angleXZ.angle, displayCenter);
 		}
 
 

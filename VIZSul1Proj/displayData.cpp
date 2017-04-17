@@ -11,7 +11,7 @@
 #define POINT_RADIUS 1
 #define VECTOR_COLOR cv::Scalar(0, 0, 255)
 #define FONT_THICKNESS 2
-#define FONT_SCALE 0.8
+#define FONT_SCALE 0.6
 #define M_PI 3.14159265358979323846  /* pi */
 
 void displayVectorY(cv::Mat *img, double direction, cv::Point centerPoint) {
@@ -44,4 +44,23 @@ void displayVectorY(cv::Mat *img, double direction, cv::Point centerPoint) {
 	textPoint.y = textPoint.y + CIRCLE_RADIUS;
 	cv::putText(*img, vectorStr, textPoint, cv::FONT_HERSHEY_SIMPLEX, FONT_SCALE, VECTOR_COLOR, FONT_THICKNESS, 8, false);
 }
-
+void displayVectorXZ(cv::Mat *img, double distance, double angle, cv::Point centerPoint)
+{
+	//put text
+	std::string vectorStr;
+	vectorStr = std::to_string(abs(distance)) + " cm; " + std::to_string(abs(angle)) + " deg";
+	cv::Point textPoint = centerPoint;
+	textPoint.x = textPoint.x + CIRCLE_RADIUS * 2;
+	textPoint.y = textPoint.y + CIRCLE_RADIUS;
+	cv::putText(*img, vectorStr, textPoint, cv::FONT_HERSHEY_SIMPLEX, FONT_SCALE, VECTOR_COLOR, FONT_THICKNESS, 8, false);
+	cv::Point startPt;
+	cv::Point endPt;
+	//put arrow
+	endPt.x = centerPoint.x + sin(angle / 180 * M_PI) * distance;
+	endPt.y = centerPoint.y + cos(angle / 180 * M_PI) * distance;
+	if ((endPt.x >= 1) && (endPt.y >= 1))
+	{
+		cv::arrowedLine(*img, centerPoint, endPt, VECTOR_COLOR, LINE_THICKNESS, 8, 0);
+	}
+	
+}
