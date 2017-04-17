@@ -4,4 +4,4 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
-void displayVectorY(cv::Mat *img, int direction, cv::Point centerPoint);
+void displayVectorY(cv::Mat *img, double direction, cv::Point centerPoint);

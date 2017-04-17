@@ -88,7 +88,7 @@ int main()
 		cv::Point displayCenter;
 		displayCenter.x = 100;
 		displayCenter.y = 100;
-		displayVectorY(&image, 10, displayCenter);
+		displayVectorY(&image, movement, displayCenter);
 		// Display image
 		if (i > 0) {
 			imshow("Display window", image);
