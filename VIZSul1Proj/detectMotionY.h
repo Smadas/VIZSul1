@@ -14,6 +14,8 @@
 #define CALIB_CAMERA_TARGET_DIST 85.0 //centimeters
 #define CALIB_CAMERA_MOVEMENT 18.0 //centimeters, backwards
 
+#define Y_TRESHOLD 0.1
+
 struct lineEquation {
 	double K = 0;
 	double Q = 0;

@@ -33,7 +33,7 @@ int main()
 	// ------------------------------------------------------------------------------------------------------
 
 	// Read images
-	std::vector<cv::Mat> readImages = readImgFiles("captureVidY\\");
+	std::vector<cv::Mat> readImages = readImgFiles("captureVidX\\");
 
 	// Detect good points to track
 	frame = readImages.at(0);
@@ -58,37 +58,43 @@ int main()
 		if (!points2[0].empty())
 		{
 			size_t i;
-			for (i = 0; i < points2[1].size(); i++)
+			for (i = 0; i < points2[0].size(); i++)
 			{
-				circle(image, points2[1][i], 3, cv::Scalar(0, 255, 0), -1, 8);
+				circle(image, points2[0][i], 3, cv::Scalar(0, 255, 0), -1, 8);
 			}
 		}
 
 		// Calculate Y axis
-		cv::Vec3f diameter = findCircle(readImages.at(i));//fitEllipse, minEnclosingCircle
+		cv::Vec3f diameter = findCircle(readImages.at(i));
 		objDist = getObjectDistanceY(widthDistanceDependency, points2[0], CALIB_CIRCLE_DIAMETER / 2);
 		double movement = getObjectMotionY(&objDist, &objDistPrev);
-		std::cout << "Camera Movement Y : " << movement << std::endl;
-		
-		// Calculate XZ axis
-		xz = getObjectmotionXZ( points2[0], points2[1]);
-		if (xz.x < -1) {
-			std::cout << "Camera Movement Right : " << -xz.x << std::endl;
+		if (abs(movement) > Y_TRESHOLD)
+		{
+			std::cout << "Camera Movement Y : " << movement << std::endl;
+			cv::Point displayCenter;
+			displayCenter.x = 30;
+			displayCenter.y = 30;
+			displayVectorY(&image, movement, displayCenter);
 		}
-		else if (xz.x > 1) {
-			std::cout << "Camera Movement Left : " << xz.x << std::endl;
-		}
-		if (xz.y < -1) {
-			std::cout << "Camera Movement Down : " << -xz.y << std::endl;
-		}
-		else if (xz.y > 1) {
-			std::cout << "Camera Movement Up : " << xz.y << std::endl;
+		else
+		{
+			// Calculate XZ axis
+			xz = getObjectmotionXZ(points2[0], points2[1]);
+			if (xz.x < -1) {
+				std::cout << "Camera Movement Right : " << -xz.x << std::endl;
+			}
+			else if (xz.x > 1) {
+				std::cout << "Camera Movement Left : " << xz.x << std::endl;
+			}
+			if (xz.y < -1) {
+				std::cout << "Camera Movement Down : " << -xz.y << std::endl;
+			}
+			else if (xz.y > 1) {
+				std::cout << "Camera Movement Up : " << xz.y << std::endl;
+			}
 		}
 
-		cv::Point displayCenter;
-		displayCenter.x = 100;
-		displayCenter.y = 100;
-		displayVectorY(&image, movement, displayCenter);
+
 		// Display image
 		if (i > 0) {
 			imshow("Display window", image);
