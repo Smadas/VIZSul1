@@ -33,7 +33,7 @@ int main()
 	// ------------------------------------------------------------------------------------------------------
 
 	// Read images
-	std::vector<cv::Mat> readImages = readImgFiles("captureVidX\\");
+	std::vector<cv::Mat> readImages = readImgFiles("captureVidY\\");
 
 	// Detect good points to track
 	frame = readImages.at(0);
@@ -99,11 +99,10 @@ int main()
 			displayVectorXZ(&image, cv::norm(points2[0], points2[1]), angleXZ.angle, displayCenter);
 		}
 
-
 		// Display image
 		if (i > 0) {
 			imshow("Display window", image);
-			waitKey(150);
+			waitKey(10000);
 		}
 
 
