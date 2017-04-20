@@ -5,14 +5,6 @@
 #include "detectMotionXZ.h"
 #include "displayData.h"
 
-//int main() {
-//
-//	//printDistanceOfMovingObject("captureVidY\\");
-//	//printMovementVectorLengthY("captureVidY\\");
-//	printMovementVectorLengthYoptflow("captureVidY\\");
-//	waitKey(0);
-//	return 0;
-//}
 
 struct target {
 	std::vector<Point2f> points;
@@ -33,7 +25,7 @@ int main()
 	// ------------------------------------------------------------------------------------------------------
 
 	// Read images
-	std::vector<cv::Mat> readImages = readImgFiles("captureVidX\\",true);
+	std::vector<cv::Mat> readImages = readImgFiles("captureVidXZ\\",true);
 
 	// Detect good points to track
 	frame = readImages.at(0);

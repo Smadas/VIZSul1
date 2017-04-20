@@ -62,8 +62,8 @@ void displayVectorXZ(cv::Mat *img, float x, float y, double angle, cv::Point cen
 	cv::putText(*img, vectorStr, textPoint, cv::FONT_HERSHEY_SIMPLEX, FONT_SCALE, VECTOR_COLOR, FONT_THICKNESS, 8, false);
 	cv::Point startPt;
 	cv::Point endPt;
+
 	//put arrow
-	
 	endPt.x = centerPoint.x + sin(angle / 180 * M_PI) * 10;
 	endPt.y = centerPoint.y + cos(angle / 180 * M_PI) * 10;
 	centerPoint.x = centerPoint.x - sin(angle / 180 * M_PI) * 10;

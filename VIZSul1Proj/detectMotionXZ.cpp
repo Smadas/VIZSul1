@@ -24,6 +24,7 @@ vectorP vectorParam(Point2f coord1, Point2f coord2) {
 }
 
 Point2f getObjectmotionXZ(vector<Point2f> points1, vector<Point2f> points2) {
+	// Calculate motion in x and z in [cm]
 
 	int pointsNumber = points1.size();
 	vectorP v;

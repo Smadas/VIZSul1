@@ -57,13 +57,6 @@ Vec3f findCircle(Mat src) {
 
 		c = circles[i];
 		colour = src.at<Vec3b>(c[1], c[0]);
-		
-		/*// Zobraz kruh
-		Point center(cvRound(c[0]), cvRound(c[1]));
-		int radius = cvRound(c[2]);
-		cv::circle(pic, center, radius, Scalar(0, 0, 255), 2, 8);
-		imshow("Display window", pic);
-		waitKey(0);*/
 
 		// compare centre pixel with [<180>,<120-255>,<220-255>] BGR 
 		if ((colour[0] < 220) && (colour[1] > 100) && (colour[2] > 180)) {
@@ -135,11 +128,6 @@ Point2f betterPoint(Mat src, Vec3f circle, Point2f coord, float angle) {
 		betterCoord.y = y;
 		colour = src.at<Vec3b>(y, x);
 
-		// Zobraz posunutie
-		/*cv::circle(pic, betterCoord, 3, Scalar(0, 0, 255), -1, 8);
-		imshow("Display window", pic);
-		waitKey(20);*/
-
 		if ((colour[0] < 240) && (colour[1] > 100) && (colour[2] > 180)) {
 			break;
 		}
@@ -188,17 +176,4 @@ Point2f calcCircleCenter(vector<Point2f> Points) {
 }
 
 
-/*void vectorParam(vector<Point2f> points) {
-	// Calculate angle and magnitude of vectors
 
-	int size = points.size();
-	int dx;
-	int dy;
-
-	for (size_t i = 0; i < size; i++) {
-		dx = points[0][i];
-	}
-
-
-
-}*/
