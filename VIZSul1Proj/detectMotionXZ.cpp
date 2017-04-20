@@ -1,5 +1,7 @@
 #include "detectMotionXZ.h"
 
+#define CALIB_XY 0.096735 // 1 pixel = 0.096735 cm
+
 
 vectorP vectorParam(Point2f coord1, Point2f coord2) {
 	// Calculate angle and magnitude of vectors
@@ -37,8 +39,9 @@ Point2f getObjectmotionXZ(vector<Point2f> points1, vector<Point2f> points2) {
 		angle = angle + v.angle;
 	}
 
-	point.x = x / pointsNumber;
-	point.y = y / pointsNumber;
+	// Calculate real motion in cm
+	point.x = (x / pointsNumber) * CALIB_XY;
+	point.y = (y / pointsNumber) * CALIB_XY;
 
 	return point;
 

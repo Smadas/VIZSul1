@@ -33,7 +33,7 @@ int main()
 	// ------------------------------------------------------------------------------------------------------
 
 	// Read images
-	std::vector<cv::Mat> readImages = readImgFiles("captureVidY\\");
+	std::vector<cv::Mat> readImages = readImgFiles("captureVidXZ\\");
 
 	// Detect good points to track
 	frame = readImages.at(0);
@@ -71,38 +71,32 @@ int main()
 		if (abs(movement) > Y_TRESHOLD)
 		{
 			std::cout << "Camera Movement Y : " << movement << std::endl;
-			cv::Point displayCenter;
-			displayCenter.x = 30;
-			displayCenter.y = 30;
-			displayVectorY(&image, movement, displayCenter);
+			displayVectorY(&image, movement, Point(30, 30));
 		}
 		else
 		{
 			// Calculate XZ axis
 			vectorP angleXZ = vectorParam(points2[0][0], points2[1][0]);
 			xz = getObjectmotionXZ(points2[0], points2[1]);
-			if (xz.x < -1) {
+			if (xz.x < -0.1) {
 				std::cout << "Camera Movement Right : " << -xz.x << std::endl;
 			}
-			else if (xz.x > 1) {
+			else if (xz.x > 0.1) {
 				std::cout << "Camera Movement Left : " << xz.x << std::endl;
 			}
-			if (xz.y < -1) {
+			if (xz.y < -0.1) {
 				std::cout << "Camera Movement Down : " << -xz.y << std::endl;
 			}
-			else if (xz.y > 1) {
+			else if (xz.y > 0.1) {
 				std::cout << "Camera Movement Up : " << xz.y << std::endl;
 			}
-			cv::Point displayCenter;
-			displayCenter.x = 30;
-			displayCenter.y = 30;
-			displayVectorXZ(&image, cv::norm(points2[0], points2[1]), angleXZ.angle, displayCenter);
+			displayVectorXZ(&image, xz.x, xz.y, angleXZ.angle, Point(30,30));
 		}
 
 		// Display image
 		if (i > 0) {
 			imshow("Display window", image);
-			waitKey(10000);
+			waitKey(300);
 		}
 
 
