@@ -7,5 +7,5 @@
 #include <vector>
 
 std::vector<std::string> getImageFileNames(std::string imagesDirectory);
-std::vector<cv::Mat> readImgFiles(std::string imagesDirectory);
+std::vector<cv::Mat> readImgFiles(std::string imagesDirectory, bool invert);
 int showImagesFromDirectory(std::string imagesDirectory);

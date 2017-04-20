@@ -39,7 +39,7 @@ std::vector<std::string> getImageFileNames(std::string imagesDirectory) {
 	return names;
 }
 
-std::vector<cv::Mat> readImgFiles(std::string imagesDirectory) {
+std::vector<cv::Mat> readImgFiles(std::string imagesDirectory, bool invert) {
 	Mat image;
 	std::vector<cv::Mat> readImages;
 	std::string imgFileName;
@@ -55,15 +55,30 @@ std::vector<cv::Mat> readImgFiles(std::string imagesDirectory) {
 	}
 
 	//read files
-	for (int imageCount = 0; imageCount < imgFilesNumber; imageCount++) {
-		imgFileName = imgFilesDirectory + imgFileNames.at(imageCount);
-		image = cv::imread(imgFileName, IMREAD_COLOR);
-		if (!image.data) { // Check for invalid input
-			cout << "Could not open or find the image!" << std::endl;
-			return{};
+	if (invert == false) {
+		for (int imageCount = 0; imageCount < imgFilesNumber; imageCount++) {
+			imgFileName = imgFilesDirectory + imgFileNames.at(imageCount);
+			image = cv::imread(imgFileName, IMREAD_COLOR);
+			if (!image.data) { // Check for invalid input
+				cout << "Could not open or find the image!" << std::endl;
+				return{};
+			}
+			else {
+				readImages.push_back(image);
+			}
 		}
-		else {
-			readImages.push_back(image);
+	}
+	else {
+		for (int imageCount = imgFilesNumber-1; imageCount > 0; imageCount--) {
+			imgFileName = imgFilesDirectory + imgFileNames.at(imageCount);
+			image = cv::imread(imgFileName, IMREAD_COLOR);
+			if (!image.data) { // Check for invalid input
+				cout << "Could not open or find the image!" << std::endl;
+				return{};
+			}
+			else {
+				readImages.push_back(image);
+			}
 		}
 	}
 	return readImages;
@@ -76,7 +91,7 @@ int showImagesFromDirectory(std::string imagesDirectory) {
 	namedWindow("Display window", WINDOW_AUTOSIZE); // Create a window for display.
 
 													//show all images from directory
-	readImages = readImgFiles(imagesDirectory);
+	readImages = readImgFiles(imagesDirectory, false);
 	numImages = readImages.size();
 	if (numImages == 0) {
 		std::cout << "Could not read images!" << std::endl;

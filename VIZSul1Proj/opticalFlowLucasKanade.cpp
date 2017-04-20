@@ -32,7 +32,7 @@ int computeOpticalFlow(cv::Mat *gray, cv::Mat *prevGray, std::vector<cv::Point2f
 
 int showOpticalFlow() {
 	//read image files
-	std::vector<cv::Mat> readImages = readImgFiles("captureVidX\\");
+	std::vector<cv::Mat> readImages = readImgFiles("captureVidX\\", false);
 
 	cv::namedWindow("LK Demo", 1);
 

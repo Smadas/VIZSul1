@@ -49,6 +49,10 @@ void displayVectorXZ(cv::Mat *img, float x, float y, double angle, cv::Point cen
 	//put text
 	std::string vectorStr;
 	float distance = sqrt(pow(x,2) + pow(y,2));
+	angle = 360 - angle + 270;
+	if (angle >= 360) {
+		angle -= 360;
+	}
 
 	vectorStr = std::to_string(distance) + " cm; " + std::to_string(abs(angle)) + " deg";
 
@@ -59,10 +63,7 @@ void displayVectorXZ(cv::Mat *img, float x, float y, double angle, cv::Point cen
 	cv::Point startPt;
 	cv::Point endPt;
 	//put arrow
-	angle = 360 - angle + 90;
-	if (angle >= 360) {
-		angle -= 360;
-	}
+	
 	endPt.x = centerPoint.x + sin(angle / 180 * M_PI) * 10;
 	endPt.y = centerPoint.y + cos(angle / 180 * M_PI) * 10;
 	centerPoint.x = centerPoint.x - sin(angle / 180 * M_PI) * 10;

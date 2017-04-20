@@ -22,7 +22,7 @@ lineEquation calibrateAxisY(std::string calibImagesDir){
 	lineEquation calibLineEquation;
 	calibLineEquation.K = 0;
 	calibLineEquation.Q = 0;
-	std::vector<cv::Mat> readImages = readImgFiles(calibImagesDir);
+	std::vector<cv::Mat> readImages = readImgFiles(calibImagesDir, false);
 	std::cout << "calib img num " << readImages.size() << std::endl;
 	if (readImages.size() < 2){
 		std::cout << "Failed to read calibration images!" << std::endl;
@@ -85,7 +85,7 @@ lineEquation getLineEquation(linePoint startPoint, linePoint endPoint){
 
 void printDistanceOfMovingObject(std::string motionImagesDir) {
 	lineEquation widthDistanceDependency = calibrateAxisY("calibY\\");
-	std::vector<cv::Mat> readImages = readImgFiles(motionImagesDir);
+	std::vector<cv::Mat> readImages = readImgFiles(motionImagesDir, false);
 	cv::namedWindow("Display window", 1);
 	for (int imgCount = 0; imgCount < readImages.size(); imgCount += 15){
 		cv::Vec3f radius = findCircle(readImages.at(imgCount));//fitEllipse, minEnclosingCircle
@@ -99,7 +99,7 @@ void printDistanceOfMovingObject(std::string motionImagesDir) {
 void printMovementVectorLengthY(std::string motionImagesDir)
 {
 	lineEquation widthDistanceDependency = calibrateAxisY("calibY\\");
-	std::vector<cv::Mat> readImages = readImgFiles(motionImagesDir);
+	std::vector<cv::Mat> readImages = readImgFiles(motionImagesDir, false);
 	cv::namedWindow("Display window", 1);
 	double objDist = 0;
 	double objDistPrev = 0;
@@ -117,7 +117,7 @@ void printMovementVectorLengthY(std::string motionImagesDir)
 void printMovementVectorLengthYoptflow(std::string motionImagesDir)
 {
 	lineEquation widthDistanceDependency = calibrateAxisY("calibY\\");
-	std::vector<cv::Mat> readImages = readImgFiles(motionImagesDir);
+	std::vector<cv::Mat> readImages = readImgFiles(motionImagesDir, false);
 	cv::Mat gray, prevGray, image, frame;
 	std::vector<cv::Point2f> points[2];
 	cv::namedWindow("Display window", 1);

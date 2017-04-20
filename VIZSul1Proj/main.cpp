@@ -33,7 +33,7 @@ int main()
 	// ------------------------------------------------------------------------------------------------------
 
 	// Read images
-	std::vector<cv::Mat> readImages = readImgFiles("captureVidXZ\\");
+	std::vector<cv::Mat> readImages = readImgFiles("captureVidX\\",true);
 
 	// Detect good points to track
 	frame = readImages.at(0);
